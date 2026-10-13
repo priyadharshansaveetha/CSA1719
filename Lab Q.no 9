@@ -1,0 +1,92 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMKtOIYb/FNi2nMP1XRHetP",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/priyadharshansaveetha/CSA1719/blob/main/Lab%20Q.no%209\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 10,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "cgUhqWsrhma5",
+        "outputId": "b95f4092-6d32-469a-ffc5-57c8067b338f"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Shortest Path: A -> B -> D -> C -> A\n",
+            "Minimum Cost: 80\n"
+          ]
+        }
+      ],
+      "source": [
+        "\n",
+        "# Travelling Salesman Problem using Brute Force\n",
+        "\n",
+        "from itertools import permutations\n",
+        "\n",
+        "def tsp(graph, start):\n",
+        "    cities = list(graph.keys())\n",
+        "    cities.remove(start)\n",
+        "\n",
+        "    min_cost = float('inf')\n",
+        "    best_path = None\n",
+        "\n",
+        "    for path in permutations(cities):\n",
+        "        cost = 0\n",
+        "        current = start\n",
+        "\n",
+        "        for city in path:\n",
+        "            cost += graph[current][city]\n",
+        "            current = city\n",
+        "\n",
+        "        cost += graph[current][start]\n",
+        "\n",
+        "        if cost < min_cost:\n",
+        "            min_cost = cost\n",
+        "            best_path = (start,) + path + (start,)\n",
+        "\n",
+        "    print(\"Shortest Path:\", \" -> \".join(best_path))\n",
+        "    print(\"Minimum Cost:\", min_cost)\n",
+        "\n",
+        "\n",
+        "# Main Program\n",
+        "graph = {\n",
+        "    'A': {'A': 0, 'B': 10, 'C': 15, 'D': 20},\n",
+        "    'B': {'A': 10, 'B': 0, 'C': 35, 'D': 25},\n",
+        "    'C': {'A': 15, 'B': 35, 'C': 0, 'D': 30},\n",
+        "    'D': {'A': 20, 'B': 25, 'C': 30, 'D': 0}\n",
+        "}\n",
+        "\n",
+        "tsp(graph, 'A')\n"
+      ]
+    }
+  ]
+}
