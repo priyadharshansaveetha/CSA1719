@@ -1,0 +1,112 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOuxRCShSJNpkZQQrf/1FkW",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/priyadharshansaveetha/CSA1719/blob/main/Lab%20Q.no%204\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 3,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "cgUhqWsrhma5",
+        "outputId": "515fefff-51cb-46a6-eb02-34b20b24fe1b"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Solution Found:\n",
+            "S = 9\n",
+            "E = 5\n",
+            "N = 6\n",
+            "D = 7\n",
+            "M = 1\n",
+            "O = 0\n",
+            "R = 8\n",
+            "Y = 2\n",
+            "\n",
+            "SEND = 9567\n",
+            "MORE = 1085\n",
+            "MONEY = 10652\n",
+            "Result: 9567 + 1085 = 10652\n"
+          ]
+        }
+      ],
+      "source": [
+        "\n",
+        "# Crypt-Arithmetic Problem using Backtracking\n",
+        "\n",
+        "from itertools import permutations\n",
+        "\n",
+        "def solve_cryptarithmetic():\n",
+        "    letters = 'SENDMORY'\n",
+        "\n",
+        "    for perm in permutations(range(10), len(letters)):\n",
+        "        values = dict(zip(letters, perm))\n",
+        "\n",
+        "        # First letters cannot be zero\n",
+        "        if values['S'] == 0 or values['M'] == 0:\n",
+        "            continue\n",
+        "\n",
+        "        SEND = (values['S'] * 1000 +\n",
+        "                values['E'] * 100 +\n",
+        "                values['N'] * 10 +\n",
+        "                values['D'])\n",
+        "\n",
+        "        MORE = (values['M'] * 1000 +\n",
+        "                values['O'] * 100 +\n",
+        "                values['R'] * 10 +\n",
+        "                values['E'])\n",
+        "\n",
+        "        MONEY = (values['M'] * 10000 +\n",
+        "                 values['O'] * 1000 +\n",
+        "                 values['N'] * 100 +\n",
+        "                 values['E'] * 10 +\n",
+        "                 values['Y'])\n",
+        "\n",
+        "        if SEND + MORE == MONEY:\n",
+        "            print(\"Solution Found:\")\n",
+        "            for letter in letters:\n",
+        "                print(letter, \"=\", values[letter])\n",
+        "\n",
+        "            print(\"\\nSEND =\", SEND)\n",
+        "            print(\"MORE =\", MORE)\n",
+        "            print(\"MONEY =\", MONEY)\n",
+        "            print(\"Result:\", SEND, \"+\", MORE, \"=\", MONEY)\n",
+        "            return\n",
+        "\n",
+        "    print(\"No solution exists!\")\n",
+        "\n",
+        "\n",
+        "# Main Program\n",
+        "solve_cryptarithmetic()\n"
+      ]
+    }
+  ]
+}
