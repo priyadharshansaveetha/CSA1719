@@ -1,0 +1,139 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "kJeG5UUtZmK6",
+        "outputId": "1cdcb8cb-fd14-4f62-ab41-c9c0d5483700"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Solution found!\n",
+            "Step 0\n",
+            "(1, 2, 3)\n",
+            "(4, 5, 6)\n",
+            "(7, 0, 8)\n",
+            "Step 1\n",
+            "(1, 2, 3)\n",
+            "(4, 5, 6)\n",
+            "(7, 8, 0)\n",
+            "Step 2\n",
+            "(1, 2, 3)\n",
+            "(4, 5, 6)\n",
+            "(7, 8, 0)\n"
+          ]
+        }
+      ],
+      "source": [
+        "\n",
+        "# 8-Puzzle Problem using A* Search Algorithm\n",
+        "\n",
+        "def heuristic(state, goal):\n",
+        "    # Calculate the number of misplaced tiles\n",
+        "    count = 0\n",
+        "    for i in range(9):\n",
+        "        if state[i] != 0 and state[i] != goal[i]:\n",
+        "            count += 1\n",
+        "    return count\n",
+        "\n",
+        "\n",
+        "def get_neighbors(state):\n",
+        "    neighbors = []\n",
+        "    zero = state.index(0)\n",
+        "\n",
+        "    moves = {\n",
+        "        'Up': -3,\n",
+        "        'Down': 3,\n",
+        "        'Left': -1,\n",
+        "        'Right': 1\n",
+        "    }\n",
+        "\n",
+        "    for move, change in moves.items():\n",
+        "        new_pos = zero + change\n",
+        "\n",
+        "        if 0 <= new_pos < 9:\n",
+        "            if move == 'Left' and zero % 3 == 0:\n",
+        "                continue\n",
+        "            if move == 'Right' and zero % 3 == 2:\n",
+        "                continue\n",
+        "\n",
+        "            new_state = list(state)\n",
+        "            new_state[zero], new_state[new_pos] = (\n",
+        "                new_state[new_pos], new_state[zero]\n",
+        "            )\n",
+        "\n",
+        "            neighbors.append((tuple(new_state), move))\n",
+        "\n",
+        "    return neighbors\n",
+        "\n",
+        "\n",
+        "def solve(start, goal):\n",
+        "    open_list = [(heuristic(start, goal), 0, start, [])]\n",
+        "    visited = set()\n",
+        "\n",
+        "    while open_list:\n",
+        "        open_list.sort(key=lambda x: x[0])\n",
+        "\n",
+        "        f, g, state, path = open_list.pop(0)\n",
+        "\n",
+        "        if state == goal:\n",
+        "            print(\"Solution found!\")\n",
+        "            for step, s in enumerate(path + [state]):\n",
+        "                print(\"Step\", step)\n",
+        "                for i in range(0, 9, 3):\n",
+        "                    print(s[i:i+3])\n",
+        "            return\n",
+        "\n",
+        "        if state in visited:\n",
+        "            continue\n",
+        "\n",
+        "        visited.add(state)\n",
+        "\n",
+        "        for neighbor, move in get_neighbors(state):\n",
+        "            if neighbor not in visited:\n",
+        "                new_g = g + 1\n",
+        "                new_f = new_g + heuristic(neighbor, goal)\n",
+        "\n",
+        "                open_list.append(\n",
+        "                    (new_f, new_g, neighbor, path + [neighbor])\n",
+        "                )\n",
+        "\n",
+        "    print(\"No solution exists!\")\n",
+        "\n",
+        "\n",
+        "# Initial and Goal States\n",
+        "start = (1, 2, 3,\n",
+        "         4, 0, 6,\n",
+        "         7, 5, 8)\n",
+        "\n",
+        "goal = (1, 2, 3,\n",
+        "        4, 5, 6,\n",
+        "        7, 8, 0)\n",
+        "\n",
+        "# Solve the puzzle\n",
+        "solve(start, goal)\n"
+      ]
+    }
+  ]
+}
