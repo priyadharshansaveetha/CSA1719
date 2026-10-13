@@ -1,0 +1,118 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMKrrf9x5W6dABV+gHDrI6d",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/priyadharshansaveetha/CSA1719/blob/main/Lab%20Q.no%202\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "cgUhqWsrhma5",
+        "outputId": "b3a165fd-5219-4515-b36c-05a0e0ccde6b"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Solution for 8-Queen Problem:\n",
+            "Q . . . . . . .\n",
+            ". . . . . . Q .\n",
+            ". . . . Q . . .\n",
+            ". . . . . . . Q\n",
+            ". Q . . . . . .\n",
+            ". . . Q . . . .\n",
+            ". . . . . Q . .\n",
+            ". . Q . . . . .\n"
+          ]
+        }
+      ],
+      "source": [
+        "\n",
+        "# 8-Queen Problem using Backtracking\n",
+        "\n",
+        "N = 8\n",
+        "\n",
+        "def print_board(board):\n",
+        "    for row in board:\n",
+        "        print(\" \".join(\"Q\" if cell else \".\" for cell in row))\n",
+        "\n",
+        "\n",
+        "def is_safe(board, row, col):\n",
+        "    # Check the left side of the current row\n",
+        "    for i in range(col):\n",
+        "        if board[row][i] == 1:\n",
+        "            return False\n",
+        "\n",
+        "    # Check upper diagonal\n",
+        "    for i, j in zip(range(row, -1, -1),\n",
+        "                    range(col, -1, -1)):\n",
+        "        if board[i][j] == 1:\n",
+        "            return False\n",
+        "\n",
+        "    # Check lower diagonal\n",
+        "    for i, j in zip(range(row, N),\n",
+        "                    range(col, -1, -1)):\n",
+        "        if board[i][j] == 1:\n",
+        "            return False\n",
+        "\n",
+        "    return True\n",
+        "\n",
+        "\n",
+        "def solve_queen(board, col):\n",
+        "    # All queens are placed\n",
+        "    if col >= N:\n",
+        "        return True\n",
+        "\n",
+        "    # Try placing queen in each row\n",
+        "    for row in range(N):\n",
+        "        if is_safe(board, row, col):\n",
+        "            board[row][col] = 1\n",
+        "\n",
+        "            if solve_queen(board, col + 1):\n",
+        "                return True\n",
+        "\n",
+        "            # Backtracking\n",
+        "            board[row][col] = 0\n",
+        "\n",
+        "    return False\n",
+        "\n",
+        "\n",
+        "# Main program\n",
+        "board = [[0 for _ in range(N)] for _ in range(N)]\n",
+        "\n",
+        "if solve_queen(board, 0):\n",
+        "    print(\"Solution for 8-Queen Problem:\")\n",
+        "    print_board(board)\n",
+        "else:\n",
+        "    print(\"No solution exists\")\n"
+      ]
+    }
+  ]
+}
