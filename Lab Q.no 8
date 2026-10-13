@@ -1,0 +1,80 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOv69Hz0rTaQxmzMRhEWIjG",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/priyadharshansaveetha/CSA1719/blob/main/Lab%20Q.no%208\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 7,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "cgUhqWsrhma5",
+        "outputId": "2ccfde24-2962-4e9a-d349-469cbf56a87c"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "DFS Traversal:\n",
+            "A B D E F C "
+          ]
+        }
+      ],
+      "source": [
+        "\n",
+        "# DFS (Depth First Search) Implementation\n",
+        "\n",
+        "def DFS(graph, start, visited=None):\n",
+        "    if visited is None:\n",
+        "        visited = set()\n",
+        "\n",
+        "    if start not in visited:\n",
+        "        print(start, end=\" \")\n",
+        "        visited.add(start)\n",
+        "\n",
+        "        for neighbour in graph[start]:\n",
+        "            DFS(graph, neighbour, visited)\n",
+        "\n",
+        "\n",
+        "# Main Program\n",
+        "graph = {\n",
+        "    'A': ['B', 'C'],\n",
+        "    'B': ['A', 'D', 'E'],\n",
+        "    'C': ['A', 'F'],\n",
+        "    'D': ['B'],\n",
+        "    'E': ['B', 'F'],\n",
+        "    'F': ['C', 'E']\n",
+        "}\n",
+        "\n",
+        "print(\"DFS Traversal:\")\n",
+        "DFS(graph, 'A')\n"
+      ]
+    }
+  ]
+}
