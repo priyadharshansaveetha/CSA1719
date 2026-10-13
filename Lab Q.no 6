@@ -1,0 +1,106 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMRgDJR4T47KAxONBxIaNr9",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/priyadharshansaveetha/CSA1719/blob/main/Lab%20Q.no%206\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 5,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "cgUhqWsrhma5",
+        "outputId": "0c8f5bbb-905d-44c8-c2e7-2be48ea568b4"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Initial State:\n",
+            "Room A: Dirty\n",
+            "Room B: Dirty\n",
+            "Vacuum Location: A\n",
+            "\n",
+            "Vacuum is cleaning Room A\n",
+            "\n",
+            "Moving from Room A to Room B\n",
+            "\n",
+            "Vacuum is cleaning Room B\n",
+            "\n",
+            "Final State:\n",
+            "Room A: Clean\n",
+            "Room B: Clean\n",
+            "Both rooms are clean!\n"
+          ]
+        }
+      ],
+      "source": [
+        "\n",
+        "# Vacuum Cleaner Problem using Simple Reflex Agent\n",
+        "\n",
+        "def vacuum_cleaner(location, room_A, room_B):\n",
+        "\n",
+        "    print(\"Initial State:\")\n",
+        "    print(\"Room A:\", room_A)\n",
+        "    print(\"Room B:\", room_B)\n",
+        "    print(\"Vacuum Location:\", location)\n",
+        "\n",
+        "    while room_A == \"Dirty\" or room_B == \"Dirty\":\n",
+        "\n",
+        "        if location == \"A\":\n",
+        "            if room_A == \"Dirty\":\n",
+        "                print(\"\\nVacuum is cleaning Room A\")\n",
+        "                room_A = \"Clean\"\n",
+        "            else:\n",
+        "                print(\"\\nMoving from Room A to Room B\")\n",
+        "                location = \"B\"\n",
+        "\n",
+        "        elif location == \"B\":\n",
+        "            if room_B == \"Dirty\":\n",
+        "                print(\"\\nVacuum is cleaning Room B\")\n",
+        "                room_B = \"Clean\"\n",
+        "            else:\n",
+        "                print(\"\\nMoving from Room B to Room A\")\n",
+        "                location = \"A\"\n",
+        "\n",
+        "    print(\"\\nFinal State:\")\n",
+        "    print(\"Room A:\", room_A)\n",
+        "    print(\"Room B:\", room_B)\n",
+        "    print(\"Both rooms are clean!\")\n",
+        "\n",
+        "\n",
+        "# Main Program\n",
+        "room_A = \"Dirty\"\n",
+        "room_B = \"Dirty\"\n",
+        "location = \"A\"\n",
+        "\n",
+        "vacuum_cleaner(location, room_A, room_B)\n"
+      ]
+    }
+  ]
+}
