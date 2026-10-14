@@ -1,0 +1,87 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyN+lh3puAIRZBlCWwoxmTc6",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/priyadharshansaveetha/CSA1719/blob/main/Lab%20Q.no%207\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "VYK-bTfFsxIc",
+        "outputId": "4ee1e3d5-25ba-4c47-c3b4-25de3a366ae9"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "BFS Traversal:\n",
+            "A B C D E F "
+          ]
+        }
+      ],
+      "source": [
+        "\n",
+        "# BFS (Breadth First Search) Algorithm\n",
+        "\n",
+        "from collections import deque\n",
+        "\n",
+        "def BFS(graph, start):\n",
+        "    visited = set()\n",
+        "    queue = deque([start])\n",
+        "\n",
+        "    print(\"BFS Traversal:\")\n",
+        "\n",
+        "    while queue:\n",
+        "        vertex = queue.popleft()\n",
+        "\n",
+        "        if vertex not in visited:\n",
+        "            print(vertex, end=\" \")\n",
+        "            visited.add(vertex)\n",
+        "\n",
+        "            for neighbour in graph[vertex]:\n",
+        "                if neighbour not in visited:\n",
+        "                    queue.append(neighbour)\n",
+        "\n",
+        "\n",
+        "# Main Program\n",
+        "graph = {\n",
+        "    'A': ['B', 'C'],\n",
+        "    'B': ['A', 'D', 'E'],\n",
+        "    'C': ['A', 'F'],\n",
+        "    'D': ['B'],\n",
+        "    'E': ['B', 'F'],\n",
+        "    'F': ['C', 'E']\n",
+        "}\n",
+        "\n",
+        "BFS(graph, 'A')\n"
+      ]
+    }
+  ]
+}
