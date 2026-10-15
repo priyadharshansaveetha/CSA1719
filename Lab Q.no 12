@@ -1,0 +1,124 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOPnuqgAv/bNR3h12JXVV5b",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/priyadharshansaveetha/CSA1719/blob/main/Lab%20Q.no%2012\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "el9biP9T1nYT",
+        "outputId": "36d62d10-39b7-40a8-ca8e-5fdb12b05405"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Welcome to Tic Tac Toe!\n",
+            "Positions are numbered from 1 to 9.\n",
+            "\n",
+            "  |   |  \n",
+            "--+---+--\n",
+            "  |   |  \n",
+            "--+---+--\n",
+            "  |   |  \n",
+            "\n",
+            "Player X turn\n"
+          ]
+        }
+      ],
+      "source": [
+        "\n",
+        "# Tic Tac Toe Game\n",
+        "\n",
+        "board = [' ' for _ in range(9)]\n",
+        "\n",
+        "def print_board():\n",
+        "    print()\n",
+        "    for i in range(0, 9, 3):\n",
+        "        print(\" | \".join(board[i:i+3]))\n",
+        "        if i < 6:\n",
+        "            print(\"--+---+--\")\n",
+        "    print()\n",
+        "\n",
+        "\n",
+        "def check_winner(player):\n",
+        "    win_positions = [\n",
+        "        (0, 1, 2), (3, 4, 5), (6, 7, 8),\n",
+        "        (0, 3, 6), (1, 4, 7), (2, 5, 8),\n",
+        "        (0, 4, 8), (2, 4, 6)\n",
+        "    ]\n",
+        "\n",
+        "    for a, b, c in win_positions:\n",
+        "        if board[a] == board[b] == board[c] == player:\n",
+        "            return True\n",
+        "\n",
+        "    return False\n",
+        "\n",
+        "\n",
+        "def tic_tac_toe():\n",
+        "    player = 'X'\n",
+        "\n",
+        "    for turn in range(9):\n",
+        "        print_board()\n",
+        "        print(\"Player\", player, \"turn\")\n",
+        "\n",
+        "        try:\n",
+        "            position = int(input(\"Enter position (1-9): \")) - 1\n",
+        "        except ValueError:\n",
+        "            print(\"Enter a valid number!\")\n",
+        "            continue\n",
+        "\n",
+        "        if position < 0 or position > 8 or board[position] != ' ':\n",
+        "            print(\"Invalid position! Try again.\")\n",
+        "            continue\n",
+        "\n",
+        "        board[position] = player\n",
+        "\n",
+        "        if check_winner(player):\n",
+        "            print_board()\n",
+        "            print(\"Player\", player, \"wins!\")\n",
+        "            return\n",
+        "\n",
+        "        player = 'O' if player == 'X' else 'X'\n",
+        "\n",
+        "    print_board()\n",
+        "    print(\"It's a Draw!\")\n",
+        "\n",
+        "\n",
+        "# Main Program\n",
+        "print(\"Welcome to Tic Tac Toe!\")\n",
+        "print(\"Positions are numbered from 1 to 9.\")\n",
+        "\n",
+        "tic_tac_toe()\n"
+      ]
+    }
+  ]
+}
