@@ -1,0 +1,99 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPSp8tEB/oXISjIHr78pgYS",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/priyadharshansaveetha/CSA1719/blob/main/Lab%20Q.no%2014\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 7,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "RHf0-fqx8Rkf",
+        "outputId": "03f9e24c-37a5-4646-cfcb-f1e7b1ca4107"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Alpha-Beta Pruning Algorithm\n",
+            "Optimal Value: 5\n"
+          ]
+        }
+      ],
+      "source": [
+        "\n",
+        "# Alpha-Beta Pruning Algorithm\n",
+        "\n",
+        "def minimax(depth, node, is_max, scores, alpha, beta):\n",
+        "    # Base condition\n",
+        "    if depth == 3:\n",
+        "        return scores[node]\n",
+        "\n",
+        "    if is_max:\n",
+        "        best = float('-inf')\n",
+        "\n",
+        "        for i in range(2):\n",
+        "            val = minimax(depth + 1, node * 2 + i,\n",
+        "                          False, scores, alpha, beta)\n",
+        "            best = max(best, val)\n",
+        "            alpha = max(alpha, best)\n",
+        "\n",
+        "            if beta <= alpha:\n",
+        "                break\n",
+        "\n",
+        "        return best\n",
+        "\n",
+        "    else:\n",
+        "        best = float('inf')\n",
+        "\n",
+        "        for i in range(2):\n",
+        "            val = minimax(depth + 1, node * 2 + i,\n",
+        "                          True, scores, alpha, beta)\n",
+        "            best = min(best, val)\n",
+        "            beta = min(beta, best)\n",
+        "\n",
+        "            if beta <= alpha:\n",
+        "                break\n",
+        "\n",
+        "        return best\n",
+        "\n",
+        "\n",
+        "# Main Program\n",
+        "scores = [3, 5, 6, 9, 1, 2, 0, -1]\n",
+        "\n",
+        "print(\"Alpha-Beta Pruning Algorithm\")\n",
+        "\n",
+        "result = minimax(0, 0, True, scores,\n",
+        "                 float('-inf'), float('inf'))\n",
+        "\n",
+        "print(\"Optimal Value:\", result)\n"
+      ]
+    }
+  ]
+}
