@@ -1,0 +1,101 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyO9zkoSdHnAxG/RjJgA+nAe",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/priyadharshansaveetha/CSA1719/blob/main/Lab%20Q.no%2016\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 2,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "WuCZsuB-UR0a",
+        "outputId": "0185979f-6eb8-4011-b059-f212b9280b6a"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Feed Forward Neural Network Output:\n",
+            "[[0.73497243]\n",
+            " [0.75492189]\n",
+            " [0.76945373]\n",
+            " [0.78668195]]\n",
+            "\n",
+            "Predicted Values:\n",
+            "[[1]\n",
+            " [1]\n",
+            " [1]\n",
+            " [1]]\n"
+          ]
+        }
+      ],
+      "source": [
+        "\n",
+        "# Feed Forward Neural Network\n",
+        "\n",
+        "import numpy as np\n",
+        "\n",
+        "# Input data\n",
+        "X = np.array([[0, 0],\n",
+        "              [0, 1],\n",
+        "              [1, 0],\n",
+        "              [1, 1]])\n",
+        "\n",
+        "# Output data\n",
+        "y = np.array([[0],\n",
+        "              [1],\n",
+        "              [1],\n",
+        "              [0]])\n",
+        "\n",
+        "# Initialize weights and bias\n",
+        "np.random.seed(1)\n",
+        "w1 = np.random.rand(2, 4)\n",
+        "b1 = np.zeros((1, 4))\n",
+        "w2 = np.random.rand(4, 1)\n",
+        "b2 = np.zeros((1, 1))\n",
+        "\n",
+        "# Sigmoid activation function\n",
+        "def sigmoid(x):\n",
+        "    return 1 / (1 + np.exp(-x))\n",
+        "\n",
+        "# Feed Forward Process\n",
+        "hidden = sigmoid(np.dot(X, w1) + b1)\n",
+        "output = sigmoid(np.dot(hidden, w2) + b2)\n",
+        "\n",
+        "# Display output\n",
+        "print(\"Feed Forward Neural Network Output:\")\n",
+        "print(output)\n",
+        "\n",
+        "print(\"\\nPredicted Values:\")\n",
+        "print((output > 0.5).astype(int))\n",
+        "\n"
+      ]
+    }
+  ]
+}
