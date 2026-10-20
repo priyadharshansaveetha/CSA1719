@@ -1,0 +1,88 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOYE4u0RjWGB1cwNej18COq",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/priyadharshansaveetha/CSA1719/blob/main/Lab%20Q.no%2018\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 19,
+      "metadata": {
+        "id": "WuCZsuB-UR0a",
+        "outputId": "0c9d332b-b406-4b8d-8cfa-1118e1c5227d",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Writing database.pl\n"
+          ]
+        }
+      ],
+      "source": [
+        "%%writefile database.pl\n",
+        "% Database facts\n",
+        "person('Arun', '2002-05-10').\n",
+        "person('Kumar', '2001-08-15').\n",
+        "person('Priya', '2003-12-20').\n",
+        "person('Ravi', '2002-03-25').\n",
+        "\n",
+        "% Rule to display details\n",
+        "display(Name, DOB) :-\n",
+        "    person(Name, DOB)."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "a50f43e4",
+        "outputId": "df122e87-923b-4e9b-87ea-16f003b54ef4"
+      },
+      "source": [
+        "!swipl -s database.pl -g \"display(Name, DOB), format('Name: ~w, DOB: ~w~n', [Name, DOB]), fail; true\" -g \"halt.\""
+      ],
+      "execution_count": 22,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Name: Arun, DOB: 2002-05-10\n",
+            "Name: Kumar, DOB: 2001-08-15\n",
+            "Name: Priya, DOB: 2003-12-20\n",
+            "Name: Ravi, DOB: 2002-03-25\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
